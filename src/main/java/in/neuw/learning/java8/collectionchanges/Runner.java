@@ -1,24 +1,24 @@
 package in.neuw.learning.java8.collectionchanges;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static net.andreinc.mockneat.unit.objects.Filler.filler;
 import static net.andreinc.mockneat.unit.types.Ints.ints;
 import static net.andreinc.mockneat.unit.user.Names.names;
-import static net.andreinc.mockneat.unit.user.Users.users;
 
 /**
  * Created by Karanbir Singh on 11/23/2018.
  **/
 public class Runner {
 
-    public static List<Person> mockData(){
+    public static List<Person> mockData() {
         List<Person> p = filler(() -> new Person())
                 .setter(Person::setId, ints().bound(100000))
                 .setter(Person::setName, names().full())
-                .setter(Person::setAge, ints().range(1,110))
+                .setter(Person::setAge, ints().range(1, 110))
                 .list(() -> new ArrayList<>(), 10) // Collecting all the results ina  List of 10 elements.
                 .get();
         //System.out.println(p);
@@ -41,10 +41,15 @@ public class Runner {
 
         //persons.stream().forEachOrdered(System.out::println);
 
-        List<Person> filteredPersons = persons.stream().filter(person -> {
-            System.out.println(person);
-            return person.getAge()<=20;
-        }).collect(Collectors.toList());
+        List<Person> filteredPersons = persons
+                .stream()
+                .filter(person -> {
+                    System.out.println(person);
+                    return person.getAge() <= 20;
+                })
+                //.sorted((p1,p2)->p1.getAge().compareTo(p2.getAge()))
+                .sorted(Comparator.comparingInt(Person::getAge))
+                .collect(Collectors.toList());
 
         System.out.println(filteredPersons);
 
