@@ -47,8 +47,8 @@ public class Runner {
                     System.out.println(person);
                     return person.getAge() <= 20;
                 })
-                //.sorted((p1,p2)->p1.getAge().compareTo(p2.getAge()))
-                .sorted(Comparator.comparingInt(Person::getAge))
+                //.sorted((p1,p2)->p1.getAge().compareTo(p2.getAge())) // sorting using comparator
+                .sorted(Comparator.comparingInt(Person::getAge)) // sorting using comparing, more like JDK8
                 .collect(Collectors.toList());
 
         System.out.println(filteredPersons);
