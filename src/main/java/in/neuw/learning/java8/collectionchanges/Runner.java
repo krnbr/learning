@@ -3,6 +3,8 @@ package in.neuw.learning.java8.collectionchanges;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static net.andreinc.mockneat.unit.objects.Filler.filler;
@@ -52,6 +54,23 @@ public class Runner {
                 .collect(Collectors.toList());
 
         System.out.println(filteredPersons);
+
+        Person p = filler(()-> new Person()).setter(Person::setId, ints().bound(100000))
+                .setter(Person::setName, names().full())
+                .setter(Person::setAge, ints().range(1, 110)).get();
+
+        Consumer<String> c = p.set_name;
+        Supplier<String> s = p.get_name;
+
+        System.out.println("===============================================");
+
+        List<Person> ps = filler(Person.random_person)
+                .list(() -> new ArrayList<>(), 10) // Collecting all the results ina  List of 10 elements.
+                .get();
+
+        System.out.println(ps);
+
+        s.get();
 
     }
 
