@@ -26,19 +26,11 @@ public class YearSpansAman {
         yosList.add(new YearsOfSpan(1977).setDeath(2003));
         yosList.add(new YearsOfSpan(1909).setDeath(1991));
 
-        Stream<YearsOfSpan> yosStreamByBirth = yosList.stream().sorted(Comparator.comparingInt(YearsOfSpan::getBirth));
-
-        List<YearsOfSpan> yosListByBirth = yosStreamByBirth.collect(Collectors.toList());
-
-        int minYear = yosListByBirth.get(0).getBirth();
+        int minYear = yosList.stream().min(Comparator.comparingInt(YearsOfSpan::getBirth)).get().getBirth();
 
         System.out.println(minYear+" minYear");
 
-        Stream<YearsOfSpan> yosStreamByDeath = yosList.stream().sorted(Comparator.comparingInt(YearsOfSpan::getDeath).reversed());
-
-        List<YearsOfSpan> yosListByDeath = yosStreamByDeath.collect(Collectors.toList());
-
-        int maxYear = yosListByDeath.get(0).getDeath();
+        int maxYear = yosList.stream().max(Comparator.comparingInt(YearsOfSpan::getDeath)).get().getDeath();
 
         System.out.println(maxYear+" maxYear");
 
@@ -68,19 +60,6 @@ public class YearSpansAman {
 
         System.out.println(popYearWise);
 
-        /*final Map.Entry<Integer, Long> lastEntry = new CustomEntry(minYear, 0L);
-
-        final int tempMinYear = minYear;
-
-        System.out.println(popYearWise.entrySet().stream().filter(
-                entry -> {
-                    if(entry.getKey() == tempMinYear){
-                        lastEntry.setValue(entry.getValue());
-                    }
-                    lastEntry.setValue(entry.getValue());
-                    return lastEntry.getValue() < entry.getValue();
-                }
-        ).collect(Collectors.toList()));*/
         final Map.Entry<Integer, Long> lastEntry = new CustomEntry(minYear, 0L);
 
         System.out.println(popYearWise.entrySet()
@@ -92,7 +71,7 @@ public class YearSpansAman {
                             return test;
                         }
                 )
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).keySet());
 
 
         // debug
