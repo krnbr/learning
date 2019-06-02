@@ -9,6 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import static in.n2w.dtos.UserDto.USER_DTO_SUPPLIER;
+
 @SpringBootApplication
 public class ConsoleApplication implements CommandLineRunner {
 
@@ -31,6 +33,6 @@ public class ConsoleApplication implements CommandLineRunner {
             LOG.info("args[{}]: {}", i, args[i]);
         }
 
-        userService.createUser(UserDto.mockUserDto());
+        userService.createUser(USER_DTO_SUPPLIER.get());
     }
 }

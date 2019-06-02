@@ -5,10 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static in.n2w.entities.User.ENTITY_NAME;
 import static in.n2w.entities.User.TABLE_NAME;
@@ -26,10 +23,11 @@ public class User {
     public static final String TABLE_NAME = USER;
 
     @Id
-    @Column(name = "USER_ID")
     @Getter
     @Setter
     @Accessors(chain = true)
+    @Column(name = "USER_ID", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
     @Setter
