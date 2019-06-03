@@ -17,12 +17,16 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public void createUser(UserDto userDto){
+    public UserDto createUser(final UserDto userDto){
 
         User user = new User();
         user.setFirstName(userDto.getFirstName()).setLastName(userDto.getLastName());
 
-        userRepository.save(user);
+        user = userRepository.save(user);
+
+        userDto.setId(user.getUserId());
+
+        return userDto;
 
     }
 

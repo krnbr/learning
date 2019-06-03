@@ -40,4 +40,11 @@ public class User {
     @Accessors(chain = true)
     private String lastName;
 
+    @Setter
+    @Getter
+    @Accessors(chain = true)
+    @OneToOne
+    @JoinColumn(name = "USER_DETAILS_ID")
+    private UserDetails userDetails;
+
 }

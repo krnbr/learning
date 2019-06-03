@@ -1,16 +1,12 @@
 package in.n2w.dtos;
 
-import in.neuw.learning.java8.collectionchanges.Person;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 import static net.andreinc.mockneat.unit.objects.Filler.filler;
-import static net.andreinc.mockneat.unit.types.Ints.ints;
 import static net.andreinc.mockneat.unit.user.Names.names;
 
 /**
@@ -42,5 +38,7 @@ public class UserDto {
     }
 
     public static Supplier<UserDto> USER_DTO_SUPPLIER = UserDto::mockUserDto;
+
+    public static UserDto MOCK_USER_DTO = USER_DTO_SUPPLIER.get();
 
 }
