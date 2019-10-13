@@ -3,6 +3,7 @@ package in.n2w;
 import in.n2w.dtos.UserDetailsDto;
 import in.n2w.dtos.UserDto;
 import in.n2w.entities.enums.Gender;
+import in.n2w.services.LocationService;
 import in.n2w.services.UserDetailsService;
 import in.n2w.services.UserService;
 import org.slf4j.Logger;
@@ -24,6 +25,9 @@ public class ConsoleApplication implements CommandLineRunner {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private LocationService locationService;
 
     private static Logger LOG = LoggerFactory.getLogger(ConsoleApplication.class);
 
@@ -48,5 +52,7 @@ public class ConsoleApplication implements CommandLineRunner {
         userDetailsDto.setGender(from(Gender.class).val());
 
         userDetailsService.createUserDetails(userDetailsDto);
+
+        locationService.saveStateCities();
     }
 }
